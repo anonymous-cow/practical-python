@@ -10,9 +10,9 @@ def portfolio_cost(filename):
         header = next(rows)
         cost = 0
         for i,row in enumerate(rows,start =1):
+            record =dict(zip(header,row))
             try:
-                #row=line.split(',')
-                cost = cost+int(row[1]) *float(row[2])
+                cost = cost+int(record['shares']) *float(record['price'])
             except ValueError:
                 print(f"Row {i}: Couldn't convert: {row}")    
             
@@ -20,6 +20,6 @@ def portfolio_cost(filename):
 
 
 
-filename='Data/missing.csv'
+filename='Data/portfoliodate.csv'
 cost = portfolio_cost(filename)
 print('Total cost:', cost)
