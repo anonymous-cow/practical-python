@@ -63,4 +63,5 @@ print(f'{headers[0]:>10s} {headers[1]:>10s} {headers[2]:>10s} {headers[3]:>10s}'
 print(('-'*10+' ')*len(headers))
 
 for name, shares, price, change in data:
-    print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
+    price = '$'+str(f'{price:0.2f}')
+    print(f'{name:>10s} {shares:>10d} {price:>10s} {change:>10.2f}')
