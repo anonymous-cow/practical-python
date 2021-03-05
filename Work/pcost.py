@@ -3,24 +3,23 @@
 # Exercise 1.27
 
 
-import sys
 import csv
 def portfolio_cost(filename):
     with open (filename) as f:
         rows = csv.reader(f)
+        header = next(rows)
         cost = 0
-        for row in rows:
+        for i,row in enumerate(rows,start =1):
             try:
                 #row=line.split(',')
                 cost = cost+int(row[1]) *float(row[2])
             except ValueError:
-                print("warning, invalid literal")
-            print(row)
+                print(f"Row {i}: Couldn't convert: {row}")    
+            
         return(cost)
 
-if len(sys.argv)==2:
-    filename= sys.argv[1]
-else:
-    filename='practical-python/Work/Data/portfolio.csv'
+
+
+filename='Data/missing.csv'
 cost = portfolio_cost(filename)
 print('Total cost:', cost)
