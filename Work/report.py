@@ -50,19 +50,27 @@ def make_report(portfolio, prices):
         data.append((stock['name'],stock['shares'],current,change))
     return data
 
-#read csvs
-portfolio = read_portfolio('Data/portfolio.csv')
-prices = read_prices('Data/prices.csv')
+def print_report(data):
+    #print report
+    headers = ('Name', 'Shares', 'Price', 'Change')
+    print(f'{headers[0]:>10s} {headers[1]:>10s} {headers[2]:>10s} {headers[3]:>10s}')
+    print(('-'*10+' ')*len(headers))
 
-#get report data
-data = make_report(portfolio,prices)
+    for name, shares, price, change in data:
+        price = '$'+str(f'{price:0.2f}')
+        print(f'{name:>10s} {shares:>10d} {price:>10s} {change:>10.2f}')
 
 
-#print report
-headers = ('Name', 'Shares', 'Price', 'Change')
-print(f'{headers[0]:>10s} {headers[1]:>10s} {headers[2]:>10s} {headers[3]:>10s}')
-print(('-'*10+' ')*len(headers))
 
-for name, shares, price, change in data:
-    price = '$'+str(f'{price:0.2f}')
-    print(f'{name:>10s} {shares:>10d} {price:>10s} {change:>10.2f}')
+def portfolio_report(portfile, pricefile):
+    #read csvs
+    portfolio = read_portfolio(portfile)
+    prices = read_prices(pricefile)
+
+    #get report data
+    data = make_report(portfolio,prices)
+
+    #print report:
+    print_report(data)
+
+
