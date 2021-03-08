@@ -2,21 +2,23 @@
 #
 # Exercise 1.27
 
-
+from report import read_portfolio
 import csv
 def portfolio_cost(filename):
-    with open (filename) as f:
-        rows = csv.reader(f)
-        header = next(rows)
-        cost = 0
-        for i,row in enumerate(rows,start =1):
-            record =dict(zip(header,row))
-            try:
-                cost = cost+int(record['shares']) *float(record['price'])
-            except ValueError:
-                print(f"Row {i}: Couldn't convert: {row}")    
+    # with open (filename) as f:
+    #     rows = csv.reader(f)
+    #     header = next(rows)
+    #     cost = 0
+    #     for i,row in enumerate(rows,start =1):
+    #         record =dict(zip(header,row))
+    #         try:
+    #             cost = cost+int(record['shares']) *float(record['price'])
+    #         except ValueError:
+    #             print(f"Row {i}: Couldn't convert: {row}")    
             
-        return(cost)
+    #     return(cost)
+    portfolio= read_portfolio(filename)
+    return sum(s['shares']*s['price'] for s in portfolio)
 
 
 
