@@ -78,3 +78,11 @@ def portfolio_report(portfile, pricefile):
     print_report(data)
 
 
+def main(argv):
+    portfile = argv[1]
+    pricefile=argv[2]
+    portfolio_report(portfile,pricefile)
+
+if __name__== '__main__':
+    import sys
+    main(sys.argv)

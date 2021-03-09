@@ -20,8 +20,11 @@ def portfolio_cost(filename):
     portfolio= read_portfolio(filename)
     return sum(s['shares']*s['price'] for s in portfolio)
 
+def main(argv):
+    filename= argv[1]
+    cost = portfolio_cost(filename)
+    print('Total cost:', cost)
 
-
-filename='Data/portfoliodate.csv'
-cost = portfolio_cost(filename)
-print('Total cost:', cost)
+if __name__=='__main__':
+    import sys
+    main(sys.argv)
