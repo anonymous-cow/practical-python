@@ -6,7 +6,8 @@ import csv
 from pprint import pprint
 def read_portfolio(filename):
     '''computes the total cost (shares*price) of a portfolio file'''
-    return parse_csv(filename, select=['name','shares','price'], types=[str, int, float])
+    with open (filename) as lines:
+        return parse_csv(lines, select=['name','shares','price'], types=[str, int, float])
     #portfolio=[]
 
     #with open(filename,'rt') as f:
@@ -32,7 +33,8 @@ def read_prices(filename):
     #            pass
 
     #return prices
-    return parse_csv(filename, types=[str,float], has_headers=False)
+    with open(filename) as lines:
+        return dict(parse_csv(lines, types=[str,float], has_headers=False))
 #price =read_prices('practical-python/Work/Data/prices.csv')
 #print (price)
 
@@ -69,7 +71,7 @@ def print_report(data):
 def portfolio_report(portfile, pricefile):
     #read csvs
     portfolio = read_portfolio(portfile)
-    prices = dict(read_prices(pricefile))
+    prices = read_prices(pricefile)
 
     #get report data
     data = make_report(portfolio,prices)
@@ -79,6 +81,8 @@ def portfolio_report(portfile, pricefile):
 
 
 def main(argv):
+    if len(args)!=3:
+        raise SystemExit(f'Usage {args[0]} portfile price file')
     portfile = argv[1]
     pricefile=argv[2]
     portfolio_report(portfile,pricefile)

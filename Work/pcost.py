@@ -21,6 +21,8 @@ def portfolio_cost(filename):
     return sum(s['shares']*s['price'] for s in portfolio)
 
 def main(argv):
+    if len(args) !=2:
+        raise SystemExit(f'Usage: {args[0]} portfoliofile')
     filename= argv[1]
     cost = portfolio_cost(filename)
     print('Total cost:', cost)
