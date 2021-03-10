@@ -3,11 +3,14 @@
 # Exercise 2.4
 from fileparse import parse_csv
 import csv
+from stock import Stock
 from pprint import pprint
 def read_portfolio(filename):
     '''computes the total cost (shares*price) of a portfolio file'''
     with open (filename) as lines:
-        return parse_csv(lines, select=['name','shares','price'], types=[str, int, float])
+        portdict= parse_csv(lines, select=['name','shares','price'], types=[str, int, float])
+        portfolio=[ Stock(d['name'], d['shares'], d['price']) for d in portdict ]
+        return portfolio
     #portfolio=[]
 
     #with open(filename,'rt') as f:
@@ -50,10 +53,10 @@ def gains(portfoliof, pricef):  #exercise 2.7
 
 def make_report(portfolio, prices):
     data = []
-    for stock in portfolio:
-        current =prices[stock['name']] 
-        change = current-stock['price']
-        data.append((stock['name'],stock['shares'],current,change))
+    for s in portfolio:
+        current =prices[s.name] 
+        change = current-s.price
+        data.append((s.name,s.shares,current,change))
     return data
 
 def print_report(data):
