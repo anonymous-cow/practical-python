@@ -46,6 +46,8 @@ class HTMLTableFormatter:
         for d in rowdata:
             print(f'<td>{d}</td>',end='')
         print('</tr>')
+class FormatError(Exception):
+    pass
 
 def create_formatter(fmt):
     if fmt=='txt':
@@ -55,7 +57,7 @@ def create_formatter(fmt):
     elif fmt =='html':
         return HTMLTableFormatter()
     else:
-        raise RuntimeError(f'Unknown format {fmt}')
+        raise FormatError(f'Unknown table format {fmt}')
 
 def print_table(objects, colnames,formatter):
     formatter.headings(colnames)

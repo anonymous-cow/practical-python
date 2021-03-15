@@ -4,7 +4,7 @@
 from fileparse import parse_csv
 import csv
 from stock import Stock
-from pprint import pprint
+from portfolio import Portfolio
 
 import tableformat
 def read_portfolio(filename):
@@ -12,7 +12,7 @@ def read_portfolio(filename):
     with open (filename) as lines:
         portdict= parse_csv(lines, select=['name','shares','price'], types=[str, int, float])
         portfolio=[ Stock(d['name'], d['shares'], d['price']) for d in portdict ]
-        return portfolio
+        return Portfolio(portfolio)
     #portfolio=[]
 
     #with open(filename,'rt') as f:
