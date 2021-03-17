@@ -1,8 +1,8 @@
 #portfolio.py
 #exercise 6.2
 
-import fileparse
-import stock
+from . import fileparse
+from . import stock
 
 class Portfolio:
     def __init__(self):

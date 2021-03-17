@@ -1,7 +1,7 @@
 #stock.py
 
 #exercise 4.1
-from typedproperty import String,Integer,Float
+from .typedproperty import String,Integer,Float
 
 class Stock():
     #__slots__=('name','_shares','price')

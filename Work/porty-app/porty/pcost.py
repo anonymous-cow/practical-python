@@ -2,7 +2,7 @@
 #
 # Exercise 1.27
 
-from report import read_portfolio
+from .report import read_portfolio
 import csv
 def portfolio_cost(filename):
     # with open (filename) as f:

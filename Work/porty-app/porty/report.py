@@ -1,12 +1,12 @@
 # report.py
 #
 # Exercise 2.4
-from fileparse import parse_csv
+from .fileparse import parse_csv
 import csv
-from stock import Stock
-from portfolio import Portfolio
+from .stock import Stock
+from .portfolio import Portfolio
 
-import tableformat
+from . import tableformat
 def read_portfolio(filename,**opts):
     with open(filename) as lines:
         return Portfolio.from_csv(lines,**opts)
@@ -93,13 +93,13 @@ def portfolio_report(portfile, pricefile,fmt='txt'):
 def main(args):
     if len(args)!=4 :
         raise SystemExit(f'Usage {args[0]} portfile price file')
-    import logging
+    #import logging
     # logging.basicConfig(
     #     filename='app.log',
     #     filemode='w',
     #     level= logging.WARNING,
     # )
-    # portfolio_report(args[1], args[2], args[3])
+    portfolio_report(args[1], args[2], args[3])
 
 if __name__== '__main__':
     import sys
