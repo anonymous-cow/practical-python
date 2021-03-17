@@ -7,12 +7,14 @@ from stock import Stock
 from portfolio import Portfolio
 
 import tableformat
-def read_portfolio(filename):
+def read_portfolio(filename,**opts):
+    with open(filename) as lines:
+        return Portfolio.from_csv(lines,**opts)
     '''computes the total cost (shares*price) of a portfolio file'''
-    with open (filename) as lines:
-        portdict= parse_csv(lines, select=['name','shares','price'], types=[str, int, float])
-        portfolio=[ Stock(d['name'], d['shares'], d['price']) for d in portdict ]
-        return Portfolio(portfolio)
+    # with open (filename) as lines:
+    #     portdict= parse_csv(lines, select=['name','shares','price'], types=[str, int, float],**opts)
+    #     portfolio=[ Stock(**d) for d in portdict]
+    #     return Portfolio(portfolio)
     #portfolio=[]
 
     #with open(filename,'rt') as f:
@@ -91,7 +93,13 @@ def portfolio_report(portfile, pricefile,fmt='txt'):
 def main(args):
     if len(args)!=4 :
         raise SystemExit(f'Usage {args[0]} portfile price file')
-    portfolio_report(args[1], args[2], args[3])
+    import logging
+    # logging.basicConfig(
+    #     filename='app.log',
+    #     filemode='w',
+    #     level= logging.WARNING,
+    # )
+    # portfolio_report(args[1], args[2], args[3])
 
 if __name__== '__main__':
     import sys
